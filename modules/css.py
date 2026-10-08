@@ -2186,4 +2186,22 @@ input:checked + .toggle-slider:before {
 .sync-settings-status[data-state="unauthorized"] { color: var(--coral); }
 .sync-settings-status[data-state="offline"] { color: var(--amber); }
 .sync-input { flex: 1; min-width: 220px; padding: 9px 12px; font-size: 13px; }
+
+/* ---------- Installable app ---------- */
+.install-app-btn {
+  margin-top: 8px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--accent); border: 0; border-radius: var(--radius-btn); padding: 8px 12px;
+  color: #fff; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.install-app-btn:hover { filter: brightness(1.1); }
+#update-bar {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 99998;
+  display: none; align-items: center; gap: 14px; padding: 10px 12px 10px 18px;
+  background: var(--surface); border: 1px solid var(--border-focus); border-radius: 999px;
+  color: var(--text); font-size: 13px; box-shadow: 0 8px 30px rgba(0,0,0,.45); max-width: calc(100vw - 32px);
+}
+#update-bar button {
+  background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 6px 14px;
+  font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
 """

@@ -1,0 +1,16 @@
+{
+  "name": "FocusDeck",
+  "short_name": "FocusDeck",
+  "description": "Focus timer, time-block planner and 10,000-hours tracker",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070A16",
+  "theme_color": "#070A16",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

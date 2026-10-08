@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   initSkillsView();
   initBackupView();
   initSyncView();
+  initPWA();
 
   // 3. Initial rendering
   renderAllViews();

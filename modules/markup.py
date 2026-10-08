@@ -62,6 +62,10 @@ BODY_MARKUP = """
         <span class="sync-dot"></span>
         <span id="sync-status-text">Sync off</span>
       </button>
+      <button type="button" class="install-app-btn" id="btn-install-app" style="display:none;">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.2" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Install app</span>
+      </button>
     </div>
   </aside>
 
