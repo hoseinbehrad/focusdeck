@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+.env*
+# personal data exports: never commit
+focusdeck-backup-*.json
+*.backup.json
+# old version kept locally as a fallback
+index.before-sync-update.html
+# unused Google AI Studio scaffolding (safe to delete from disk)
+package.json
+package-lock.json
+tsconfig.json
+vite.config.ts
+metadata.json
+src/
+public/
+node_modules/
