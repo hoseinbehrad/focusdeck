@@ -2204,4 +2204,82 @@ input:checked + .toggle-slider:before {
   background: var(--accent); color: #fff; border: 0; border-radius: 999px; padding: 6px 14px;
   font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap;
 }
+
+/* =========================================
+   PHONE LAYOUT (narrow screens only; desktop is unchanged)
+   ========================================= */
+@media (max-width: 760px) {
+  #app-container { display: block; }
+
+  /* Sidebar becomes a bottom tab bar */
+  #sidebar {
+    position: fixed; top: auto; bottom: 0; left: 0; right: 0;
+    width: 100%; height: auto; flex-direction: row; align-items: stretch;
+    padding: 4px 2px calc(4px + env(safe-area-inset-bottom));
+    border-right: 0; border-top: 1px solid var(--border);
+    background-color: rgb(12,17,32);
+    z-index: 500;
+  }
+  #sidebar .brand-logo, #sidebar .streak-card, #btn-install-app { display: none !important; }
+  .nav-menu { flex-direction: row; gap: 0; flex: 1; justify-content: space-around; }
+  .nav-item {
+    flex: 1 1 0; min-width: 0; flex-direction: column; justify-content: center; gap: 3px;
+    padding: 6px 2px; margin: 0; font-size: 10px; text-align: center;
+  }
+  .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .nav-item span { display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-item[data-short] span { display: none; }
+  .nav-item[data-short]::after { content: attr(data-short); display: block; white-space: nowrap; }
+
+  /* Log filters wrap; search takes the full row */
+  .log-filter-row { flex-wrap: wrap; min-width: 0 !important; }
+  #log-search-input { max-width: none !important; flex: 1 1 100%; }
+
+  /* Sync status: small pill at the top right */
+  .sidebar-bottom {
+    position: fixed; top: calc(8px + env(safe-area-inset-top)); right: 12px;
+    padding: 0; border: 0; margin: 0; z-index: 501;
+  }
+  .sync-status {
+    width: auto; margin: 0; padding: 4px 10px; font-size: 10px;
+    background: var(--surface); border-radius: 999px;
+  }
+
+  /* Content: full width, room for the top pill and the bottom bar */
+  #main-content { height: auto; min-height: 100vh; overflow: visible; }
+  .view-container { padding: calc(44px + env(safe-area-inset-top)) 16px calc(86px + env(safe-area-inset-bottom)); }
+  .view-header { margin-bottom: 16px; }
+  .view-title { font-size: 20px; }
+  .card { padding: 16px; border-radius: 16px; }
+
+  /* Grids collapse to one column */
+  .timer-view-grid, .charts-2col-grid, .settings-grid, .skills-grid { grid-template-columns: 1fr !important; }
+  .reports-kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
+  .tb-container { flex-direction: column; }
+  .tb-builder-panel, .tb-timeline-panel { width: 100%; }
+
+  /* Timer: smaller dial, Start/Pause right under the task, duration options after */
+  .timer-card { padding: 18px 16px 20px; }
+  .mode-badge { margin-bottom: 12px; }
+  .timer-dial-wrap { width: 210px; height: 210px; margin-bottom: 12px; }
+  .timer-digits { font-size: 50px; }
+  .wave-band-container { display: none; }
+  .task-binder-row { order: 1; }
+  .timer-controls { order: 2; margin-top: 14px; }
+  .timer-duration-adjuster { order: 3; margin-top: 16px; }
+  .timer-card > div[style*="margin-top: 14px"] { order: 4; }
+  .stats-grid-row { order: 5; }
+
+  /* Tables scroll sideways inside their card instead of stretching the page */
+  .table-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Dialogs fit the screen */
+  .modal-card, .modal-card-lg {
+    width: calc(100vw - 24px) !important; max-width: none !important;
+    max-height: calc(100vh - 32px); overflow-y: auto; padding: 18px;
+  }
+
+  #update-bar { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  #toast-container { bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
+}
 """

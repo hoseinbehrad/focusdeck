@@ -32,7 +32,7 @@ BODY_MARKUP = """
         <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         <span>Reports</span>
       </button>
-      <button class="nav-item" data-view="skills" id="nav-skills">
+      <button class="nav-item" data-view="skills" id="nav-skills" data-short="Hours">
         <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 0 0 3h9a1.5 1.5 0 0 0 0-3H15c-.55 0-1-.45-1-1v-2.34"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
         <span>10,000 Hours</span>
       </button>
@@ -379,7 +379,7 @@ BODY_MARKUP = """
 
       <div class="card table-card">
         <div class="log-toolbar">
-          <div style="display:flex; gap:12px; align-items:center; flex:1; min-width:260px;">
+          <div class="log-filter-row" style="display:flex; gap:12px; align-items:center; flex:1; min-width:260px;">
             <input type="text" class="task-input" id="log-search-input" placeholder="Search sessions, labels, tags, notes..." style="padding:8px 12px; font-size:13px; max-width:320px;" />
             <select class="tb-time-input" id="log-date-filter" style="padding:8px 12px;">
               <option value="all">All Time</option>

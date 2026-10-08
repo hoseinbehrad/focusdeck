@@ -2,7 +2,7 @@
 // Caches the app so it opens with no connection (or with pages.dev blocked).
 // A new build changes VERSION, the browser installs the new worker in the background,
 // and the page offers a "Reload" button to switch to it.
-const VERSION = '7ee06267d49c';
+const VERSION = '12235d3a194e';
 const CACHE = 'focusdeck-' + VERSION;
 const ASSETS = [
   '/',
