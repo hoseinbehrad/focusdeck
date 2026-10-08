@@ -17,3 +17,6 @@ metadata.json
 src/
 public/
 node_modules/
+# local Cloudflare dev files
+.dev.vars
+.wrangler/

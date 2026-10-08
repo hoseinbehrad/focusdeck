@@ -36,3 +36,13 @@ This writes `index.html`.
 | modules/js_backup.py | Export, import, snapshots |
 | modules/js_views_and_charts.py | Views, log, reports, settings |
 | modules/js_main.py | Startup |
+
+## Sync server (Cloudflare Pages Functions + D1)
+
+- `site/` is what Pages publishes (built by `assemble.py`).
+- `functions/api/sync.js`: `POST /api/sync` with `{ since, changes }`. Stores a change only if its `updatedAt`
+  is newer than the server copy, gives each stored change a sequence number, and returns everything after `since`.
+- `functions/api/status.js`: `GET /api/status`. No token: reachability check. With token: record counts.
+- `migrations/0001_init.sql`: database schema.
+- Auth: header `Authorization: Bearer <SYNC_TOKEN>`. `SYNC_TOKEN` is a secret set in Cloudflare, never in this repo.
+- Local test: put `SYNC_TOKEN="..."` in `.dev.vars`, then `wrangler d1 migrations apply focusdeck --local` and `wrangler pages dev`.

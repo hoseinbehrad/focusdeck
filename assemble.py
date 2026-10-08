@@ -35,7 +35,10 @@ HTML_TEMPLATE = f"""<!DOCTYPE html>
 </html>
 """
 
-with open('index.html', 'w', encoding='utf-8') as f:
-    f.write(HTML_TEMPLATE)
+# index.html: open locally on this PC. site/index.html: what Cloudflare Pages publishes.
+os.makedirs('site', exist_ok=True)
+for path in ('index.html', os.path.join('site', 'index.html')):
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(HTML_TEMPLATE)
 
 print(f"Successfully generated index.html. Total size: {len(HTML_TEMPLATE)} bytes.")
