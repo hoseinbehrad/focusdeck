@@ -117,6 +117,13 @@ const LIST_TYPES = [
   { key: 'parkedThoughts', type: 'thought', ordered: false }
 ];
 const CONFIG_KEYS = ['dayWindow', 'dismissedRecentSessionIds'];
+const MANAGED_TYPES = new Set(['session', 'tag', 'skill', 'backlog', 'template', 'thought', 'block', 'dayplan', 'setting', 'config']);
+
+function isManagedRecord(id, type) {
+  if (!MANAGED_TYPES.has(type)) return false;
+  if (type === 'config') return CONFIG_KEYS.includes(id.slice('config:'.length));
+  return true;
+}
 
 function freshAppData() {
   return {
@@ -314,15 +321,18 @@ function persistRecords() {
     if (!prev || prev.deleted || prev.json !== json) {
       puts.push({ id, type: rec.type, data: rec.data, updatedAt: now, deleted: false });
       previous.set(id, prev);
-      _persisted.set(id, { type: rec.type, json, deleted: false });
+      _persisted.set(id, { type: rec.type, json, deleted: false, updatedAt: now });
     }
   });
 
   _persisted.forEach((prev, id) => {
-    if (!prev.deleted && !current.has(id)) {
-      puts.push({ id, type: prev.type, data: null, updatedAt: Date.now(), deleted: true });
+    // Only delete records this version of the app manages. Records from a newer app version
+    // (unknown types or config keys) are left untouched instead of being wiped.
+    if (!prev.deleted && !current.has(id) && isManagedRecord(id, prev.type)) {
+      const ts = Date.now();
+      puts.push({ id, type: prev.type, data: null, updatedAt: ts, deleted: true });
       previous.set(id, prev);
-      _persisted.set(id, { type: prev.type, json: null, deleted: true });
+      _persisted.set(id, { type: prev.type, json: null, deleted: true, updatedAt: ts });
     }
   });
 
@@ -330,6 +340,7 @@ function persistRecords() {
 
   _saveChain = _saveChain.then(() => idbWriteRecords(puts)).then(() => {
     clearStorageError();
+    if (typeof onLocalRecordsWritten === 'function') onLocalRecordsWritten(puts.length);
   }).catch(err => {
     // Roll back our bookkeeping so the next save retries these records
     previous.forEach((prev, id) => {
@@ -364,7 +375,7 @@ async function loadAppData() {
   if (records.length > 0) {
     appData = compose(records);
     records.forEach(r => {
-      _persisted.set(r.id, { type: r.type, json: r.deleted ? null : stableStringify(r.data), deleted: !!r.deleted });
+      _persisted.set(r.id, { type: r.type, json: r.deleted ? null : stableStringify(r.data), deleted: !!r.deleted, updatedAt: r.updatedAt || 0 });
     });
     _storageReady = true;
   } else if (!_localFlags.legacyMigrated && localStorage.getItem(LEGACY_STORAGE_KEY)) {
@@ -400,6 +411,57 @@ async function loadAppData() {
   try {
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
   } catch (e) { /* ignore */ }
+}
+
+// ---------- records arriving from the cloud ----------
+// Stores incoming records that are newer than the local copy. Never queues them for upload.
+// Order matters: in-memory edits are captured first, then incoming records update the bookkeeping
+// AND the in-memory appData in the same synchronous step. Otherwise a save running in between would
+// compare stale memory against the new bookkeeping and wrongly mark the incoming items as deleted.
+// Returns the number of records applied.
+async function applyRemoteRecords(changes) {
+  await flushSaves();
+
+  // ---- synchronous section: no awaits until appData is rebuilt ----
+  persistRecords(); // capture edits made while we were waiting
+  const toPut = [];
+  changes.forEach(c => {
+    const local = _persisted.get(c.id);
+    const localTs = local ? (local.updatedAt || 0) : -1;
+    if ((c.updatedAt || 0) > localTs) {
+      const rec = { id: c.id, type: c.type, data: c.deleted ? null : c.data, updatedAt: c.updatedAt || 0, deleted: !!c.deleted };
+      toPut.push(rec);
+      _persisted.set(rec.id, { type: rec.type, json: rec.deleted ? null : stableStringify(rec.data), deleted: rec.deleted, updatedAt: rec.updatedAt });
+    }
+  });
+  if (!toPut.length) return 0;
+  rebuildAppDataFromPersisted();
+  // ---- end synchronous section ----
+
+  await new Promise((resolve, reject) => {
+    const tx = _db.transaction(['records', 'outbox'], 'readwrite');
+    const rs = tx.objectStore('records');
+    const ob = tx.objectStore('outbox');
+    toPut.forEach(rec => { rs.put(rec); ob.delete(rec.id); });
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error || new Error('Transaction aborted (storage may be full)'));
+  });
+  return toPut.length;
+}
+
+// Rebuilds appData from the bookkeeping map (always the latest state). Keeps device-only state.
+// Must only be called right after _persisted was brought up to date synchronously.
+function rebuildAppDataFromPersisted() {
+  const recs = [];
+  _persisted.forEach((p, id) => {
+    recs.push({ id, type: p.type, deleted: p.deleted, data: p.deleted || p.json === null ? null : JSON.parse(p.json) });
+  });
+  const keepTimer = appData.timer;
+  const keepMeta = appData.meta;
+  appData = compose(recs);
+  appData.timer = keepTimer;
+  appData.meta = keepMeta;
 }
 
 // Waits for all pending writes (used before reloads)

@@ -58,6 +58,10 @@ BODY_MARKUP = """
           </div>
         </div>
       </div>
+      <button type="button" class="sync-status" id="sync-status" data-state="off" title="Cloud sync">
+        <span class="sync-dot"></span>
+        <span id="sync-status-text">Sync off</span>
+      </button>
     </div>
   </aside>
 
@@ -602,6 +606,34 @@ BODY_MARKUP = """
       </div>
 
       <div class="settings-grid">
+        <!-- CLOUD SYNC -->
+        <div class="card" id="sync-card">
+          <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:4px;">Cloud Sync</div>
+          <div style="font-size:12px; color:var(--muted); margin-bottom:14px;">Keeps this device and your other devices in sync through your Cloudflare server. Works offline; changes upload when the server is reachable.</div>
+
+          <div class="sync-settings-status" id="sync-settings-status" data-state="off">Sync off</div>
+
+          <div id="sync-connect-form">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px;">
+              <input type="password" class="task-input sync-input" id="sync-token-input" placeholder="Paste your sync key" autocomplete="off" spellcheck="false" />
+              <button class="btn btn-primary btn-sm" id="btn-sync-connect"><span>Connect</span></button>
+            </div>
+            <details style="margin-top:10px; font-size:12px; color:var(--muted);">
+              <summary style="cursor:pointer;">Server (advanced)</summary>
+              <input type="text" class="task-input sync-input" id="sync-server-input" placeholder="Leave empty for the default server" autocomplete="off" spellcheck="false" style="margin-top:8px;" />
+            </details>
+            <div style="margin-top:10px; font-size:11px; color:var(--muted);">The key is stored only on this device.</div>
+          </div>
+
+          <div id="sync-connected-actions" style="display:none; margin-top:12px;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <button class="btn btn-primary btn-sm" id="btn-sync-now"><span>Sync Now</span></button>
+              <button class="btn btn-secondary btn-sm" id="btn-sync-disconnect"><span>Disconnect This Device</span></button>
+            </div>
+            <div style="margin-top:10px; font-size:11px; color:var(--muted);">Server: <span id="sync-server-label"></span></div>
+          </div>
+        </div>
+
         <!-- NEW WHOLE-APP BACKUP & RESTORE (TOP OF SETTINGS) -->
         <div class="card">
           <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:4px;">Whole-App Backup & Restore</div>

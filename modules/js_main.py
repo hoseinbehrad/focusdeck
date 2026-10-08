@@ -14,6 +14,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   initTimeBlockView();
   initSkillsView();
   initBackupView();
+  initSyncView();
 
   // 3. Initial rendering
   renderAllViews();
