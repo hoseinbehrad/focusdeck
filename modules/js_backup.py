@@ -218,7 +218,13 @@ function applyImport(mode) {
       }
     });
 
-    // 6. Merge tags
+    // 6. Merge reviews (keep this device's version when both exist)
+    if (!appData.reviews) appData.reviews = {};
+    Object.entries(pendingImportData.reviews || {}).forEach(([key, r]) => {
+      if (!appData.reviews[key]) appData.reviews[key] = r;
+    });
+
+    // 7. Merge tags
     const existingTagNames = new Set(appData.tags.map(t => t.name.toLowerCase()));
     (pendingImportData.tags || []).forEach(t => {
       if (!existingTagNames.has(t.name.toLowerCase())) {

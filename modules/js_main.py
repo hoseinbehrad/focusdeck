@@ -16,6 +16,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   initBackupView();
   initSyncView();
   initPWA();
+  initReviewView();
 
   // 3. Initial rendering
   renderAllViews();

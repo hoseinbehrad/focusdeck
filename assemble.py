@@ -3,6 +3,7 @@ from modules.css import CSS_CONTENT
 from modules.js_storage import JS_STORAGE
 from modules.js_sync import JS_SYNC
 from modules.js_pwa import JS_PWA
+from modules.js_review import JS_REVIEW
 from modules.markup import BODY_MARKUP
 from modules.js_state_and_timer import JS_STATE_AND_TIMER
 from modules.js_timeblock import JS_TIMEBLOCK
@@ -36,6 +37,7 @@ HTML_TEMPLATE = f"""<!DOCTYPE html>
 {JS_BACKUP}
 {JS_SYNC}
 {JS_PWA}
+{JS_REVIEW}
 {JS_VIEWS_AND_CHARTS}
 {JS_MAIN}
   </script>

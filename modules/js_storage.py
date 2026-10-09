@@ -117,7 +117,7 @@ const LIST_TYPES = [
   { key: 'parkedThoughts', type: 'thought', ordered: false }
 ];
 const CONFIG_KEYS = ['dayWindow', 'dismissedRecentSessionIds'];
-const MANAGED_TYPES = new Set(['session', 'tag', 'skill', 'backlog', 'template', 'thought', 'block', 'dayplan', 'setting', 'config']);
+const MANAGED_TYPES = new Set(['session', 'tag', 'skill', 'backlog', 'template', 'thought', 'block', 'dayplan', 'setting', 'config', 'review']);
 
 function isManagedRecord(id, type) {
   if (!MANAGED_TYPES.has(type)) return false;
@@ -139,6 +139,7 @@ function freshAppData() {
     timeblockTemplates: [],
     skills: [],
     manualBacklogEntries: [],
+    reviews: {},
     meta: { lastExport: null, lastImport: null }
   };
 }
@@ -189,6 +190,13 @@ function decompose(data) {
     if (data[k] !== undefined) out.set('config:' + k, { type: 'config', data: { key: k, value: data[k] } });
   });
 
+  // Reviews: one record per day / week ("day:2026-10-09", "week:2026-10-03")
+  const reviews = data.reviews || {};
+  Object.keys(reviews).forEach(key => {
+    const r = reviews[key];
+    if (r && typeof r === 'object') out.set('review:' + key, { type: 'review', data: { ...r, key } });
+  });
+
   return out;
 }
 
@@ -223,6 +231,8 @@ function compose(records) {
       data.settings[d.key] = d.value;
     } else if (r.type === 'config') {
       data[d.key] = d.value;
+    } else if (r.type === 'review') {
+      data.reviews[d.key] = d;
     }
   });
 

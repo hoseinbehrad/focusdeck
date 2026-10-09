@@ -2216,6 +2216,73 @@ input:checked + .toggle-slider:before {
   font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap;
 }
 
+
+/* ---------- Review ---------- */
+.rv-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.rv-arrow { min-width: 36px; justify-content: center; font-size: 18px; line-height: 1; }
+.rv-nav-label { font-size: 15px; font-weight: 700; color: #fff; margin-left: 6px; }
+.rv-weekstart { margin-left: auto; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.rv-kpis { margin-bottom: 20px; }
+.rv-kpi-sub { font-size: 12px; color: var(--muted); }
+.rv-kpi-small { font-size: 20px; }
+.rv-good { color: var(--teal) !important; }
+.rv-mid { color: var(--amber) !important; }
+.rv-bad { color: var(--coral) !important; }
+.rv-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; align-items: start; }
+.rv-side { display: flex; flex-direction: column; gap: 20px; }
+@media (max-width: 1100px) { .rv-grid { grid-template-columns: 1fr; } }
+.rv-table-card { padding: 20px 20px 16px; overflow-x: auto; }
+.rv-table { width: 100%; }
+.rv-table th:first-child, .rv-table td:first-child { padding-left: 4px; }
+.rv-table td { vertical-align: middle; }
+.rv-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
+.rv-over { color: var(--amber); }
+.rv-under { color: var(--muted); }
+.rv-pill { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 10px; white-space: nowrap; }
+.rv-pill-done { background: rgba(45,212,167,0.15); color: var(--teal); }
+.rv-pill-part { background: rgba(255,182,72,0.15); color: var(--amber); }
+.rv-pill-open { background: rgba(255,255,255,0.06); color: var(--muted); }
+.rv-pill-moved { background: rgba(124,92,255,0.15); color: var(--accent-2); }
+.rv-carried { font-size: 11px; color: var(--accent-2); margin-left: 6px; }
+.rv-empty { font-size: 13px; color: var(--muted); padding: 6px 0; }
+.rv-footnote { font-size: 11px; color: var(--muted); margin-top: 12px; }
+.rv-carry-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; cursor: pointer; }
+.rv-carry-row:last-child { border-bottom: 0; }
+.rv-carry-label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text); }
+.rv-carry-left { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.rv-textarea { resize: vertical; min-height: 90px; font-size: 14px; line-height: 1.5; }
+.rv-shutdown { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 14px; color: var(--text); cursor: pointer; }
+.rv-shutdown input { width: 18px; height: 18px; accent-color: var(--teal); }
+.rv-save-status { font-size: 11px; color: var(--muted); }
+.rv-nowrap { white-space: nowrap; }
+.rv-check { color: var(--teal); font-weight: 700; }
+.rv-day-row { cursor: pointer; }
+.rv-day-row:hover td { background: rgba(255,255,255,0.02); }
+.rv-bar-cell { width: 34%; min-width: 120px; }
+.rv-bar-track { position: relative; height: 14px; }
+.rv-bar-plan, .rv-bar-focus { position: absolute; left: 0; border-radius: 4px; }
+.rv-bar-plan { top: 0; height: 14px; background: rgba(255,255,255,0.08); }
+.rv-bar-focus { top: 4px; height: 6px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+.rv-legend { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.rv-leg-plan, .rv-leg-focus { display: inline-block; width: 12px; height: 8px; border-radius: 3px; margin-left: 8px; }
+.rv-leg-plan { background: rgba(255,255,255,0.15); }
+.rv-leg-focus { background: var(--accent); }
+.rv-hbar { display: grid; grid-template-columns: minmax(90px, 160px) 1fr auto; align-items: center; gap: 10px; padding: 6px 0; font-size: 13px; }
+.rv-hbar-name { display: flex; align-items: center; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--text); }
+.rv-hbar-track { height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; }
+.rv-hbar-fill { display: block; height: 100%; border-radius: 4px; }
+.rv-hbar-val { color: var(--muted); font-size: 12px; white-space: nowrap; }
+.rv-notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rv-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+#review-bar {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 99997;
+  display: none; align-items: center; gap: 10px; padding: 10px 12px 10px 18px;
+  background: var(--surface); border: 1px solid rgba(45,212,167,0.45); border-radius: 999px;
+  color: var(--text); font-size: 13px; box-shadow: 0 8px 30px rgba(0,0,0,.45); max-width: calc(100vw - 32px);
+}
+#review-bar button { background: var(--teal); color: #06231b; border: 0; border-radius: 999px; padding: 6px 14px; font: inherit; font-weight: 700; cursor: pointer; white-space: nowrap; }
+#review-bar button.rv-later { background: transparent; color: var(--muted); padding: 6px 8px; }
+
 /* =========================================
    PHONE LAYOUT (narrow screens only; desktop is unchanged)
    ========================================= */
@@ -2290,7 +2357,14 @@ input:checked + .toggle-slider:before {
     max-height: calc(100vh - 32px); overflow-y: auto; padding: 18px;
   }
 
-  #update-bar { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  #update-bar, #review-bar { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  #review-bar { flex-wrap: wrap; justify-content: center; border-radius: 16px; text-align: center; }
+  .rv-tabs { width: 100%; }
+  .rv-tabs .rv-tab { flex: 1; }
+  .rv-weekstart { margin-left: 0; width: 100%; }
+  .rv-notes-grid { grid-template-columns: 1fr; }
+  .rv-bar-cell, .rv-bar-head { display: none; }
+  .rv-hbar { grid-template-columns: minmax(80px, 120px) 1fr auto; }
   #toast-container { bottom: calc(80px + env(safe-area-inset-bottom)) !important; }
 }
 
@@ -2321,6 +2395,10 @@ input:checked + .toggle-slider:before {
       <button class="nav-item" data-view="timeblock" id="nav-timeblock">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         <span>Time Block</span>
+      </button>
+      <button class="nav-item" data-view="review" id="nav-review">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Review</span>
       </button>
       <button class="nav-item" data-view="log" id="nav-log">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -2655,6 +2733,109 @@ input:checked + .toggle-slider:before {
               <div class="tb-hour-labels" id="tb-hour-labels"></div>
               <div class="tb-track" id="tb-track"></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: REVIEW (daily shutdown + weekly) -->
+    <section class="view-container" id="view-review">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Review</div>
+          <div class="view-desc">Compare the plan with what happened, carry over what's left, and close the day or week</div>
+        </div>
+        <div class="range-pills rv-tabs">
+          <button type="button" class="range-pill rv-tab active" data-tab="day">Day</button>
+          <button type="button" class="range-pill rv-tab" data-tab="week">Week</button>
+        </div>
+      </div>
+
+      <!-- DAY -->
+      <div id="rv-day-panel">
+        <div class="rv-nav">
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-day-prev" aria-label="Previous day">‹</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-rv-day-today">Today</button>
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-day-next" aria-label="Next day">›</button>
+          <span class="rv-nav-label" id="rv-day-label"></span>
+        </div>
+
+        <div class="reports-kpi-grid rv-kpis" id="rv-day-kpis"></div>
+
+        <div class="rv-grid">
+          <div class="card rv-table-card">
+            <div class="chart-title" style="margin-bottom:12px;">Plan vs actual</div>
+            <table class="data-table rv-table">
+              <thead><tr><th>Block</th><th>Planned</th><th>Actual</th><th>Diff</th><th>Status</th></tr></thead>
+              <tbody id="rv-day-blocks"></tbody>
+            </table>
+            <div class="rv-footnote">A block marked done counts as fully kept, even without timer time.</div>
+          </div>
+
+          <div class="rv-side">
+            <div class="card">
+              <div class="chart-title" style="margin-bottom:12px;">Unfinished blocks</div>
+              <div id="rv-carry-list"></div>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-rv-carry" style="margin-top:12px; display:none;"><span>Move to tomorrow</span></button>
+            </div>
+
+            <div class="card">
+              <div class="chart-header" style="margin-bottom:10px;">
+                <div class="chart-title">Shutdown</div>
+                <span class="rv-save-status" id="review-save-status-day"></span>
+              </div>
+              <textarea class="task-input rv-textarea" id="rv-day-note" rows="4" placeholder="What worked today? What will you change tomorrow?"></textarea>
+              <label class="rv-shutdown"><input type="checkbox" id="rv-day-shutdown" /> <span>Shutdown complete. Day closed.</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK -->
+      <div id="rv-week-panel" style="display:none;">
+        <div class="rv-nav">
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-week-prev" aria-label="Previous week">‹</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-rv-week-this">This week</button>
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-week-next" aria-label="Next week">›</button>
+          <span class="rv-nav-label" id="rv-week-label"></span>
+          <label class="rv-weekstart">Week starts
+            <select class="tb-time-input" id="rv-week-start-select">
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
+              <option value="1">Monday</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="reports-kpi-grid rv-kpis" id="rv-week-kpis"></div>
+
+        <div class="card rv-table-card" style="margin-bottom:20px;">
+          <div class="chart-header" style="margin-bottom:12px;">
+            <div class="chart-title">Day by day</div>
+            <div class="rv-legend"><span class="rv-leg-plan"></span>Planned <span class="rv-leg-focus"></span>Focus</div>
+          </div>
+          <table class="data-table rv-table">
+            <thead><tr><th>Day</th><th>Planned</th><th>Focus</th><th>Kept</th><th>Blocks</th><th>Shutdown</th><th class="rv-bar-head"></th></tr></thead>
+            <tbody id="rv-week-days"></tbody>
+          </table>
+          <div class="rv-footnote">Tap a day to open its review.</div>
+        </div>
+
+        <div class="charts-2col-grid">
+          <div class="card"><div class="chart-title" style="margin-bottom:14px;">Focus by tag</div><div id="rv-week-tags"></div></div>
+          <div class="card"><div class="chart-title" style="margin-bottom:14px;">Practice by skill</div><div id="rv-week-skills"></div></div>
+        </div>
+
+        <div class="card">
+          <div class="chart-header" style="margin-bottom:10px;">
+            <div class="chart-title">Weekly notes</div>
+            <span class="rv-save-status" id="review-save-status-week"></span>
+          </div>
+          <div class="rv-notes-grid">
+            <div><div class="rv-label">Wins and lessons</div>
+              <textarea class="task-input rv-textarea" id="rv-week-wins" rows="5" placeholder="What went well? What got in the way?"></textarea></div>
+            <div><div class="rv-label">Focus for next week</div>
+              <textarea class="task-input rv-textarea" id="rv-week-next" rows="5" placeholder="The few things that matter most next week"></textarea></div>
           </div>
         </div>
       </div>
@@ -3453,7 +3634,8 @@ const DEFAULT_SETTINGS = {
   desktopNotif: false,
   showCountdownTab: true,
   dailyGoalMin: 240,
-  customPreset: null
+  customPreset: null,
+  weekStart: 6 // 0 = Sunday, 1 = Monday, 6 = Saturday
 };
 
 const DEFAULT_TAGS = [
@@ -3506,6 +3688,7 @@ function migrate(data) {
   if (!Array.isArray(data.skills)) data.skills = [];
   if (!Array.isArray(data.manualBacklogEntries)) data.manualBacklogEntries = [];
   if (!data.meta || typeof data.meta !== 'object') data.meta = { lastExport: null, lastImport: null };
+  if (!data.reviews || typeof data.reviews !== 'object' || Array.isArray(data.reviews)) data.reviews = {};
 
   // Snapshots are device-only now and must never travel inside data (they used to nest and grow).
   delete data.snapshots;
@@ -3843,7 +4026,14 @@ function endEarlyAndSave() {
   if (t.status === 'idle') return;
 
   const now = Date.now();
-  const actualMs = Math.max(1000, now - (t.startedAt || now));
+  // Count only active (unpaused) time: planned length minus what was still left on the clock.
+  // Pauses push endsAt later, so wall-clock time (now - startedAt) would wrongly include them.
+  const plannedMs = t.plannedMs || getModeDurationMs(t.mode);
+  const remainingMs = t.status === 'running'
+    ? Math.max(0, (t.endsAt || now) - now)
+    : Math.max(0, t.remainingMs || 0);
+  const actualMs = Math.max(1000, Math.min(plannedMs, plannedMs - remainingMs));
+  const startedAt = t.startedAt || (now - actualMs);
   const sessId = uid('sess');
 
   const record = {
@@ -3851,9 +4041,10 @@ function endEarlyAndSave() {
     mode: t.mode,
     label: (t.label && t.label.trim()) ? t.label.trim() : (t.mode === 'focus' ? 'Focus Session' : 'Break'),
     tags: [ ...(t.selectedTagIds || []) ],
-    plannedMs: t.plannedMs || getModeDurationMs(t.mode),
-    actualMs: actualMs,
-    startedAt: t.startedAt || (now - actualMs),
+    plannedMs,
+    actualMs,
+    pausedMs: Math.max(0, (now - startedAt) - actualMs),
+    startedAt,
     endedAt: now,
     completed: true,
     interruptions: t.interruptions || 0,
@@ -3881,6 +4072,7 @@ function finalizeCompletedSession(endedTimestamp, wasAway) {
     tags: [ ...(t.selectedTagIds || []) ],
     plannedMs: planned,
     actualMs: planned,
+    pausedMs: t.startedAt ? Math.max(0, (now - t.startedAt) - planned) : 0,
     startedAt: t.startedAt || (now - planned),
     endedAt: now,
     completed: true,
@@ -4120,7 +4312,7 @@ const LIST_TYPES = [
   { key: 'parkedThoughts', type: 'thought', ordered: false }
 ];
 const CONFIG_KEYS = ['dayWindow', 'dismissedRecentSessionIds'];
-const MANAGED_TYPES = new Set(['session', 'tag', 'skill', 'backlog', 'template', 'thought', 'block', 'dayplan', 'setting', 'config']);
+const MANAGED_TYPES = new Set(['session', 'tag', 'skill', 'backlog', 'template', 'thought', 'block', 'dayplan', 'setting', 'config', 'review']);
 
 function isManagedRecord(id, type) {
   if (!MANAGED_TYPES.has(type)) return false;
@@ -4142,6 +4334,7 @@ function freshAppData() {
     timeblockTemplates: [],
     skills: [],
     manualBacklogEntries: [],
+    reviews: {},
     meta: { lastExport: null, lastImport: null }
   };
 }
@@ -4192,6 +4385,13 @@ function decompose(data) {
     if (data[k] !== undefined) out.set('config:' + k, { type: 'config', data: { key: k, value: data[k] } });
   });
 
+  // Reviews: one record per day / week ("day:2026-10-09", "week:2026-10-03")
+  const reviews = data.reviews || {};
+  Object.keys(reviews).forEach(key => {
+    const r = reviews[key];
+    if (r && typeof r === 'object') out.set('review:' + key, { type: 'review', data: { ...r, key } });
+  });
+
   return out;
 }
 
@@ -4226,6 +4426,8 @@ function compose(records) {
       data.settings[d.key] = d.value;
     } else if (r.type === 'config') {
       data[d.key] = d.value;
+    } else if (r.type === 'review') {
+      data.reviews[d.key] = d;
     }
   });
 
@@ -6349,7 +6551,13 @@ function applyImport(mode) {
       }
     });
 
-    // 6. Merge tags
+    // 6. Merge reviews (keep this device's version when both exist)
+    if (!appData.reviews) appData.reviews = {};
+    Object.entries(pendingImportData.reviews || {}).forEach(([key, r]) => {
+      if (!appData.reviews[key]) appData.reviews[key] = r;
+    });
+
+    // 7. Merge tags
     const existingTagNames = new Set(appData.tags.map(t => t.name.toLowerCase()));
     (pendingImportData.tags || []).forEach(t => {
       if (!existingTagNames.has(t.name.toLowerCase())) {
@@ -6806,6 +7014,428 @@ function showUpdateBar(waitingWorker) {
 
 
 // ==========================================
+// 15. REVIEWS (daily shutdown + weekly)
+// ==========================================
+let reviewTab = 'day';        // 'day' | 'week'
+let reviewDayDate = null;     // 'YYYY-MM-DD'
+let reviewWeekStart = null;   // 'YYYY-MM-DD' (first day of the week)
+let _reviewSaveTimer = null;
+const REVIEW_PROMPT_KEY = 'focusdeck.reviewPrompt.v1';
+
+// ---------- date helpers ----------
+function addDaysStr(dateStr, n) {
+  const d = new Date(dateStr + 'T00:00:00');
+  d.setDate(d.getDate() + n);
+  return formatDateString(d.getTime());
+}
+
+function getWeekStartDay() {
+  const v = parseInt(appData.settings.weekStart, 10);
+  return [0, 1, 6].includes(v) ? v : 6;
+}
+
+function weekStartOf(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  const diff = (d.getDay() - getWeekStartDay() + 7) % 7;
+  d.setDate(d.getDate() - diff);
+  return formatDateString(d.getTime());
+}
+
+function shortDayLabel(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'short', day: 'numeric', month: 'short' });
+}
+
+function fmtMs(ms) {
+  return formatMinutesToHours(Math.round((ms || 0) / 60000));
+}
+
+// ---------- calculations ----------
+function sessionMatchesSkill(sess, skill) {
+  const byLabel = (skill.linkedLabels || []).includes(sess.label);
+  const byTag = (skill.linkedTags || []).some(t => (sess.tags || []).includes(t));
+  return byLabel || byTag;
+}
+
+// Plan vs reality for one day. A block marked done counts as fully kept even without timer time.
+function computeDayStats(dateStr) {
+  const plan = appData.timeblockPlans[dateStr];
+  const blocks = (plan && Array.isArray(plan.blocks)) ? plan.blocks : [];
+  const linked = new Set();
+
+  const rows = blocks.map(b => {
+    (b.linkedSessionIds || []).forEach(id => linked.add(id));
+    const plannedMs = Math.max(0, (b.durationMin || 0) * 60000);
+    const actualMs = Math.max(0, b.actualMs || 0);
+    const done = b.status === 'done';
+    const keptMs = done ? plannedMs : Math.min(actualMs, plannedMs);
+    return {
+      id: b.id, label: b.label || 'Untitled', color: b.color || PALETTE[0],
+      plannedMs, actualMs, keptMs, done,
+      status: b.status || 'planned',
+      movedTo: b.movedTo || null, movedFrom: b.movedFrom || null,
+      unfinished: !done && actualMs < plannedMs && !b.movedTo
+    };
+  });
+
+  const focus = (appData.sessions || []).filter(s => s.mode === 'focus' && formatDateString(s.startedAt) === dateStr);
+  const focusMs = focus.reduce((n, s) => n + (s.actualMs || 0), 0);
+  const unplannedMs = focus.filter(s => !linked.has(s.id)).reduce((n, s) => n + (s.actualMs || 0), 0);
+  const plannedMs = rows.reduce((n, r) => n + r.plannedMs, 0);
+  const keptMs = rows.reduce((n, r) => n + r.keptMs, 0);
+  const thoughts = (appData.parkedThoughts || []).filter(t => formatDateString(t.createdAt) === dateStr).length;
+
+  return {
+    date: dateStr, rows,
+    plannedMs, keptMs, focusMs, unplannedMs,
+    keptPct: plannedMs > 0 ? Math.round((keptMs / plannedMs) * 100) : null,
+    doneCount: rows.filter(r => r.done).length,
+    blockCount: rows.length,
+    movedCount: rows.filter(r => r.movedTo).length,
+    sessionCount: focus.length,
+    thoughts,
+    review: (appData.reviews || {})['day:' + dateStr] || null
+  };
+}
+
+function computeWeekStats(startStr) {
+  const days = [];
+  for (let i = 0; i < 7; i++) days.push(computeDayStats(addDaysStr(startStr, i)));
+  const endStr = addDaysStr(startStr, 6);
+
+  const plannedMs = days.reduce((n, d) => n + d.plannedMs, 0);
+  const keptMs = days.reduce((n, d) => n + d.keptMs, 0);
+  const focusMs = days.reduce((n, d) => n + d.focusMs, 0);
+
+  const weekSessions = (appData.sessions || []).filter(s => {
+    if (s.mode !== 'focus') return false;
+    const ds = formatDateString(s.startedAt);
+    return ds >= startStr && ds <= endStr;
+  });
+
+  const tagMap = new Map();
+  weekSessions.forEach(s => {
+    const tags = (s.tags && s.tags.length) ? s.tags : ['__none'];
+    tags.forEach(t => tagMap.set(t, (tagMap.get(t) || 0) + (s.actualMs || 0)));
+  });
+  const tagRows = [...tagMap.entries()].map(([id, ms]) => {
+    const tag = (appData.tags || []).find(t => t.id === id);
+    return { name: tag ? tag.name : 'No tag', color: tag ? tag.color : '#7A83A6', ms };
+  }).sort((a, b) => b.ms - a.ms);
+
+  const skillRows = (appData.skills || []).map(sk => ({
+    name: sk.name, color: sk.color || PALETTE[0],
+    ms: weekSessions.filter(s => sessionMatchesSkill(s, sk)).reduce((n, s) => n + (s.actualMs || 0), 0)
+  })).filter(r => r.ms > 0).sort((a, b) => b.ms - a.ms);
+
+  const withFocus = days.filter(d => d.focusMs > 0);
+  const best = withFocus.length ? withFocus.reduce((a, b) => (b.focusMs > a.focusMs ? b : a)) : null;
+  const planned = days.filter(d => d.plannedMs > 0);
+  const worst = planned.length ? planned.reduce((a, b) => ((b.keptPct ?? 0) < (a.keptPct ?? 0) ? b : a)) : null;
+
+  return {
+    start: startStr, end: endStr, days,
+    plannedMs, keptMs, focusMs,
+    keptPct: plannedMs > 0 ? Math.round((keptMs / plannedMs) * 100) : null,
+    movedCount: days.reduce((n, d) => n + d.movedCount, 0),
+    shutdowns: days.filter(d => d.review && d.review.shutdown).length,
+    tagRows, skillRows, best, worst,
+    review: (appData.reviews || {})['week:' + startStr] || null
+  };
+}
+
+// ---------- actions ----------
+function getOrCreateReview(key, base) {
+  if (!appData.reviews) appData.reviews = {};
+  if (!appData.reviews[key]) appData.reviews[key] = { ...base };
+  return appData.reviews[key];
+}
+
+function saveReviewField(key, base, field, value, immediate) {
+  const r = getOrCreateReview(key, base);
+  r[field] = value;
+  r.savedAt = Date.now();
+  const status = document.getElementById('review-save-status-' + (key.startsWith('week:') ? 'week' : 'day'));
+  if (status) status.textContent = 'Saving...';
+  if (_reviewSaveTimer) clearTimeout(_reviewSaveTimer);
+  _reviewSaveTimer = setTimeout(() => {
+    saveAppData();
+    if (status) status.textContent = 'Saved';
+  }, immediate ? 0 : 700);
+}
+
+// Copies the selected unfinished blocks to the next day with the time still left on them.
+function carryOverBlocks(dateStr, blockIds) {
+  const plan = appData.timeblockPlans[dateStr];
+  if (!plan || !blockIds.length) return 0;
+  const target = addDaysStr(dateStr, 1);
+  if (!appData.timeblockPlans[target]) appData.timeblockPlans[target] = { blocks: [], notes: '' };
+  const targetPlan = appData.timeblockPlans[target];
+  if (!Array.isArray(targetPlan.blocks)) targetPlan.blocks = [];
+
+  let moved = 0;
+  plan.blocks.forEach(b => {
+    if (!blockIds.includes(b.id) || b.movedTo) return;
+    const leftMin = Math.max(5, Math.round(((b.durationMin || 0) * 60000 - (b.actualMs || 0)) / 60000));
+    targetPlan.blocks.push({
+      id: uid('tb'),
+      label: b.label,
+      tags: [ ...(b.tags || []) ],
+      durationMin: leftMin,
+      status: 'planned',
+      actualMs: 0,
+      linkedSessionIds: [],
+      color: b.color,
+      movedFrom: dateStr
+    });
+    b.movedTo = target;
+    moved++;
+  });
+  if (moved) {
+    saveAppData();
+    showToast(`Moved ${moved} block${moved === 1 ? '' : 's'} to ${shortDayLabel(target)}`, 'var(--teal)');
+  }
+  return moved;
+}
+
+// ---------- rendering ----------
+function pctClass(p) {
+  if (p === null) return '';
+  if (p >= 80) return 'rv-good';
+  if (p >= 50) return 'rv-mid';
+  return 'rv-bad';
+}
+
+function renderReviewView() {
+  if (!reviewDayDate) reviewDayDate = getTodayDateString();
+  if (!reviewWeekStart) reviewWeekStart = weekStartOf(getTodayDateString());
+
+  document.querySelectorAll('.rv-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === reviewTab));
+  document.getElementById('rv-day-panel').style.display = reviewTab === 'day' ? '' : 'none';
+  document.getElementById('rv-week-panel').style.display = reviewTab === 'week' ? '' : 'none';
+
+  if (reviewTab === 'day') renderDayReview();
+  else renderWeekReview();
+}
+
+function renderDayReview() {
+  const st = computeDayStats(reviewDayDate);
+  const isToday = reviewDayDate === getTodayDateString();
+  document.getElementById('rv-day-label').textContent = (isToday ? 'Today · ' : '') + shortDayLabel(reviewDayDate);
+
+  document.getElementById('rv-day-kpis').innerHTML = `
+    <div class="card kpi-card"><div class="kpi-title">Plan kept</div>
+      <div class="kpi-value ${pctClass(st.keptPct)}">${st.keptPct === null ? '—' : st.keptPct + '%'}</div>
+      <div class="rv-kpi-sub">${fmtMs(st.keptMs)} of ${fmtMs(st.plannedMs)} planned</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Focus time</div>
+      <div class="kpi-value">${fmtMs(st.focusMs)}</div>
+      <div class="rv-kpi-sub">${st.sessionCount} session${st.sessionCount === 1 ? '' : 's'} · ${fmtMs(st.unplannedMs)} unplanned</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Blocks done</div>
+      <div class="kpi-value">${st.doneCount}/${st.blockCount}</div>
+      <div class="rv-kpi-sub">${st.movedCount} moved to next day</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Distractions noted</div>
+      <div class="kpi-value">${st.thoughts}</div>
+      <div class="rv-kpi-sub">from the timer's noise list</div></div>`;
+
+  const body = document.getElementById('rv-day-blocks');
+  if (!st.rows.length) {
+    body.innerHTML = `<tr><td colspan="5" class="rv-empty">No blocks planned for this day.</td></tr>`;
+  } else {
+    body.innerHTML = st.rows.map(r => {
+      const diff = r.actualMs - r.plannedMs;
+      const diffTxt = r.actualMs === 0 ? '—' : (diff === 0 ? '0' : (diff > 0 ? '+' : '−') + fmtMs(Math.abs(diff)));
+      const status = r.movedTo ? `<span class="rv-pill rv-pill-moved">Moved → ${escapeHTML(shortDayLabel(r.movedTo))}</span>`
+        : r.done ? '<span class="rv-pill rv-pill-done">Done</span>'
+        : r.actualMs > 0 ? '<span class="rv-pill rv-pill-part">Partial</span>'
+        : '<span class="rv-pill rv-pill-open">Not started</span>';
+      return `<tr>
+        <td><span class="rv-dot" style="background:${escapeHTML(r.color)}"></span>${escapeHTML(r.label)}${r.movedFrom ? ' <span class="rv-carried">carried over</span>' : ''}</td>
+        <td>${fmtMs(r.plannedMs)}</td>
+        <td>${r.actualMs ? fmtMs(r.actualMs) : '—'}</td>
+        <td class="${diff > 0 && r.actualMs ? 'rv-over' : (r.actualMs && diff < 0 ? 'rv-under' : '')}">${diffTxt}</td>
+        <td>${status}</td></tr>`;
+    }).join('');
+  }
+
+  const open = st.rows.filter(r => r.unfinished);
+  const carry = document.getElementById('rv-carry-list');
+  const carryBtn = document.getElementById('btn-rv-carry');
+  if (!open.length) {
+    carry.innerHTML = '<div class="rv-empty">Nothing left over. Clean day.</div>';
+    carryBtn.style.display = 'none';
+  } else {
+    carry.innerHTML = open.map(r => {
+      const left = Math.max(5, Math.round((r.plannedMs - r.actualMs) / 60000));
+      return `<label class="rv-carry-row"><input type="checkbox" class="rv-carry-cb" value="${escapeHTML(r.id)}" checked />
+        <span class="rv-dot" style="background:${escapeHTML(r.color)}"></span>
+        <span class="rv-carry-label">${escapeHTML(r.label)}</span>
+        <span class="rv-carry-left">${formatMinutesToHours(left)} left</span></label>`;
+    }).join('');
+    carryBtn.style.display = '';
+    carryBtn.querySelector('span').textContent = `Move to ${shortDayLabel(addDaysStr(reviewDayDate, 1))}`;
+  }
+
+  const rv = st.review || {};
+  const noteEl = document.getElementById('rv-day-note');
+  if (document.activeElement !== noteEl) noteEl.value = rv.note || '';
+  document.getElementById('rv-day-shutdown').checked = !!rv.shutdown;
+  const status = document.getElementById('review-save-status-day');
+  if (status) status.textContent = rv.savedAt ? 'Saved' : '';
+}
+
+function renderWeekReview() {
+  const st = computeWeekStats(reviewWeekStart);
+  const thisWeek = reviewWeekStart === weekStartOf(getTodayDateString());
+  document.getElementById('rv-week-label').textContent = (thisWeek ? 'This week · ' : '') + shortDayLabel(st.start) + ' – ' + shortDayLabel(st.end);
+  document.getElementById('rv-week-start-select').value = String(getWeekStartDay());
+
+  document.getElementById('rv-week-kpis').innerHTML = `
+    <div class="card kpi-card"><div class="kpi-title">Focus time</div>
+      <div class="kpi-value">${fmtMs(st.focusMs)}</div>
+      <div class="rv-kpi-sub">avg ${fmtMs(st.focusMs / 7)} per day</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Plan kept</div>
+      <div class="kpi-value ${pctClass(st.keptPct)}">${st.keptPct === null ? '—' : st.keptPct + '%'}</div>
+      <div class="rv-kpi-sub">${fmtMs(st.keptMs)} of ${fmtMs(st.plannedMs)} planned</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Shutdowns done</div>
+      <div class="kpi-value">${st.shutdowns}/7</div>
+      <div class="rv-kpi-sub">${st.movedCount} block${st.movedCount === 1 ? '' : 's'} carried over</div></div>
+    <div class="card kpi-card"><div class="kpi-title">Best / weakest day</div>
+      <div class="kpi-value rv-kpi-small">${st.best ? escapeHTML(shortDayLabel(st.best.date).split(',')[0]) : '—'} / ${st.worst ? escapeHTML(shortDayLabel(st.worst.date).split(',')[0]) : '—'}</div>
+      <div class="rv-kpi-sub">most focus / lowest plan kept</div></div>`;
+
+  const maxMs = Math.max(1, ...st.days.map(d => Math.max(d.plannedMs, d.focusMs)));
+  document.getElementById('rv-week-days').innerHTML = st.days.map(d => `
+    <tr class="rv-day-row" data-date="${d.date}">
+      <td class="rv-nowrap">${escapeHTML(shortDayLabel(d.date))}</td>
+      <td>${d.plannedMs ? fmtMs(d.plannedMs) : '—'}</td>
+      <td>${d.focusMs ? fmtMs(d.focusMs) : '—'}</td>
+      <td class="${pctClass(d.keptPct)}">${d.keptPct === null ? '—' : d.keptPct + '%'}</td>
+      <td>${d.blockCount ? d.doneCount + '/' + d.blockCount : '—'}</td>
+      <td>${d.review && d.review.shutdown ? '<span class="rv-check">✓</span>' : ''}</td>
+      <td class="rv-bar-cell"><div class="rv-bar-track">
+        <div class="rv-bar-plan" style="width:${(d.plannedMs / maxMs * 100).toFixed(1)}%"></div>
+        <div class="rv-bar-focus" style="width:${(d.focusMs / maxMs * 100).toFixed(1)}%"></div></div></td>
+    </tr>`).join('');
+
+  const barList = (rows, emptyTxt) => {
+    if (!rows.length) return `<div class="rv-empty">${emptyTxt}</div>`;
+    const max = Math.max(...rows.map(r => r.ms));
+    return rows.map(r => `<div class="rv-hbar">
+      <span class="rv-hbar-name"><span class="rv-dot" style="background:${escapeHTML(r.color)}"></span>${escapeHTML(r.name)}</span>
+      <span class="rv-hbar-track"><span class="rv-hbar-fill" style="width:${(r.ms / max * 100).toFixed(1)}%; background:${escapeHTML(r.color)}"></span></span>
+      <span class="rv-hbar-val">${fmtMs(r.ms)}</span></div>`).join('');
+  };
+  document.getElementById('rv-week-tags').innerHTML = barList(st.tagRows, 'No focus sessions this week.');
+  document.getElementById('rv-week-skills').innerHTML = barList(st.skillRows, 'No skill practice this week.');
+
+  const rv = st.review || {};
+  const winsEl = document.getElementById('rv-week-wins');
+  const nextEl = document.getElementById('rv-week-next');
+  if (document.activeElement !== winsEl) winsEl.value = rv.wins || '';
+  if (document.activeElement !== nextEl) nextEl.value = rv.next || '';
+  const status = document.getElementById('review-save-status-week');
+  if (status) status.textContent = rv.savedAt ? 'Saved' : '';
+}
+
+// ---------- end-of-day prompt ----------
+function checkShutdownPrompt() {
+  if (!appData || !appData.dayWindow) return;
+  const today = getTodayDateString();
+  let flag = null;
+  try { flag = localStorage.getItem(REVIEW_PROMPT_KEY); } catch (e) { /* ignore */ }
+  if (flag === today) return;
+  const rv = (appData.reviews || {})['day:' + today];
+  if (rv && rv.shutdown) return;
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  if (nowMin < (appData.dayWindow.endMin || 1320)) return;
+  showShutdownBar(today);
+}
+
+function showShutdownBar(today) {
+  let bar = document.getElementById('review-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'review-bar';
+    bar.setAttribute('role', 'status');
+    bar.innerHTML = '<span>Your day is over. Time for the shutdown review.</span>' +
+      '<button type="button" id="btn-review-bar-open">Review</button>' +
+      '<button type="button" id="btn-review-bar-later" class="rv-later">Later</button>';
+    document.body.appendChild(bar);
+  }
+  bar.style.display = 'flex';
+  const dismiss = () => {
+    try { localStorage.setItem(REVIEW_PROMPT_KEY, today); } catch (e) { /* ignore */ }
+    bar.style.display = 'none';
+  };
+  document.getElementById('btn-review-bar-open').onclick = () => {
+    dismiss();
+    reviewTab = 'day';
+    reviewDayDate = today;
+    switchView('review');
+  };
+  document.getElementById('btn-review-bar-later').onclick = dismiss;
+}
+
+// ---------- wiring ----------
+function initReviewView() {
+  document.querySelectorAll('.rv-tab').forEach(b => b.addEventListener('click', () => {
+    reviewTab = b.dataset.tab;
+    renderReviewView();
+  }));
+
+  document.getElementById('btn-rv-day-prev').addEventListener('click', () => { reviewDayDate = addDaysStr(reviewDayDate, -1); renderDayReview(); });
+  document.getElementById('btn-rv-day-next').addEventListener('click', () => { reviewDayDate = addDaysStr(reviewDayDate, 1); renderDayReview(); });
+  document.getElementById('btn-rv-day-today').addEventListener('click', () => { reviewDayDate = getTodayDateString(); renderDayReview(); });
+  document.getElementById('btn-rv-week-prev').addEventListener('click', () => { reviewWeekStart = addDaysStr(reviewWeekStart, -7); renderWeekReview(); });
+  document.getElementById('btn-rv-week-next').addEventListener('click', () => { reviewWeekStart = addDaysStr(reviewWeekStart, 7); renderWeekReview(); });
+  document.getElementById('btn-rv-week-this').addEventListener('click', () => { reviewWeekStart = weekStartOf(getTodayDateString()); renderWeekReview(); });
+
+  document.getElementById('rv-week-start-select').addEventListener('change', e => {
+    appData.settings.weekStart = parseInt(e.target.value, 10);
+    saveAppData();
+    reviewWeekStart = weekStartOf(reviewWeekStart);
+    renderWeekReview();
+  });
+
+  // Clicking a day in the week table opens that day's review
+  document.getElementById('rv-week-days').addEventListener('click', e => {
+    const row = e.target.closest('.rv-day-row');
+    if (!row) return;
+    reviewDayDate = row.dataset.date;
+    reviewTab = 'day';
+    renderReviewView();
+  });
+
+  document.getElementById('btn-rv-carry').addEventListener('click', () => {
+    const ids = [...document.querySelectorAll('.rv-carry-cb:checked')].map(cb => cb.value);
+    if (!ids.length) { showToast('Select at least one block', 'var(--amber)'); return; }
+    carryOverBlocks(reviewDayDate, ids);
+    renderDayReview();
+  });
+
+  const dayBase = () => ({ kind: 'day', date: reviewDayDate });
+  document.getElementById('rv-day-note').addEventListener('input', e => saveReviewField('day:' + reviewDayDate, dayBase(), 'note', e.target.value));
+  document.getElementById('rv-day-shutdown').addEventListener('change', e => {
+    saveReviewField('day:' + reviewDayDate, dayBase(), 'shutdown', e.target.checked, true);
+    if (e.target.checked) {
+      showToast('Shutdown complete. Day closed.', 'var(--teal)');
+      const bar = document.getElementById('review-bar');
+      if (bar && reviewDayDate === getTodayDateString()) bar.style.display = 'none';
+    }
+    setTimeout(renderDayReview, 10);
+  });
+
+  const weekBase = () => ({ kind: 'week', weekStart: reviewWeekStart });
+  document.getElementById('rv-week-wins').addEventListener('input', e => saveReviewField('week:' + reviewWeekStart, weekBase(), 'wins', e.target.value));
+  document.getElementById('rv-week-next').addEventListener('input', e => saveReviewField('week:' + reviewWeekStart, weekBase(), 'next', e.target.value));
+
+  checkShutdownPrompt();
+  setInterval(checkShutdownPrompt, 60000);
+}
+
+
+// ==========================================
 // 7. VIEWS, CHARTS, AND UI CONTROLLERS
 // ==========================================
 
@@ -6905,6 +7535,8 @@ function switchView(viewName) {
 
   if (viewName === 'timeblock') {
     renderTimeBlockView();
+  } else if (viewName === 'review') {
+    renderReviewView();
   } else if (viewName === 'skills') {
     renderSkillsView();
   } else if (viewName === 'reports') {
@@ -8504,6 +9136,7 @@ window.deleteTag = function(id) {
 function renderAllViews() {
   renderTimerUI();
   if (activeViewId === 'timeblock') renderTimeBlockView();
+  else if (activeViewId === 'review') renderReviewView();
   else if (activeViewId === 'skills') renderSkillsView();
   else if (activeViewId === 'reports') renderReportsView();
   else if (activeViewId === 'log') renderLogView();
@@ -8527,6 +9160,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   initBackupView();
   initSyncView();
   initPWA();
+  initReviewView();
 
   // 3. Initial rendering
   renderAllViews();

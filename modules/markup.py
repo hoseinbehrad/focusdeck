@@ -24,6 +24,10 @@ BODY_MARKUP = """
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         <span>Time Block</span>
       </button>
+      <button class="nav-item" data-view="review" id="nav-review">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Review</span>
+      </button>
       <button class="nav-item" data-view="log" id="nav-log">
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
         <span>Log</span>
@@ -357,6 +361,109 @@ BODY_MARKUP = """
               <div class="tb-hour-labels" id="tb-hour-labels"></div>
               <div class="tb-track" id="tb-track"></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: REVIEW (daily shutdown + weekly) -->
+    <section class="view-container" id="view-review">
+      <div class="view-header">
+        <div>
+          <div class="view-title">Review</div>
+          <div class="view-desc">Compare the plan with what happened, carry over what's left, and close the day or week</div>
+        </div>
+        <div class="range-pills rv-tabs">
+          <button type="button" class="range-pill rv-tab active" data-tab="day">Day</button>
+          <button type="button" class="range-pill rv-tab" data-tab="week">Week</button>
+        </div>
+      </div>
+
+      <!-- DAY -->
+      <div id="rv-day-panel">
+        <div class="rv-nav">
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-day-prev" aria-label="Previous day">‹</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-rv-day-today">Today</button>
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-day-next" aria-label="Next day">›</button>
+          <span class="rv-nav-label" id="rv-day-label"></span>
+        </div>
+
+        <div class="reports-kpi-grid rv-kpis" id="rv-day-kpis"></div>
+
+        <div class="rv-grid">
+          <div class="card rv-table-card">
+            <div class="chart-title" style="margin-bottom:12px;">Plan vs actual</div>
+            <table class="data-table rv-table">
+              <thead><tr><th>Block</th><th>Planned</th><th>Actual</th><th>Diff</th><th>Status</th></tr></thead>
+              <tbody id="rv-day-blocks"></tbody>
+            </table>
+            <div class="rv-footnote">A block marked done counts as fully kept, even without timer time.</div>
+          </div>
+
+          <div class="rv-side">
+            <div class="card">
+              <div class="chart-title" style="margin-bottom:12px;">Unfinished blocks</div>
+              <div id="rv-carry-list"></div>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-rv-carry" style="margin-top:12px; display:none;"><span>Move to tomorrow</span></button>
+            </div>
+
+            <div class="card">
+              <div class="chart-header" style="margin-bottom:10px;">
+                <div class="chart-title">Shutdown</div>
+                <span class="rv-save-status" id="review-save-status-day"></span>
+              </div>
+              <textarea class="task-input rv-textarea" id="rv-day-note" rows="4" placeholder="What worked today? What will you change tomorrow?"></textarea>
+              <label class="rv-shutdown"><input type="checkbox" id="rv-day-shutdown" /> <span>Shutdown complete. Day closed.</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEEK -->
+      <div id="rv-week-panel" style="display:none;">
+        <div class="rv-nav">
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-week-prev" aria-label="Previous week">‹</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-rv-week-this">This week</button>
+          <button type="button" class="btn btn-secondary btn-sm rv-arrow" id="btn-rv-week-next" aria-label="Next week">›</button>
+          <span class="rv-nav-label" id="rv-week-label"></span>
+          <label class="rv-weekstart">Week starts
+            <select class="tb-time-input" id="rv-week-start-select">
+              <option value="6">Saturday</option>
+              <option value="0">Sunday</option>
+              <option value="1">Monday</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="reports-kpi-grid rv-kpis" id="rv-week-kpis"></div>
+
+        <div class="card rv-table-card" style="margin-bottom:20px;">
+          <div class="chart-header" style="margin-bottom:12px;">
+            <div class="chart-title">Day by day</div>
+            <div class="rv-legend"><span class="rv-leg-plan"></span>Planned <span class="rv-leg-focus"></span>Focus</div>
+          </div>
+          <table class="data-table rv-table">
+            <thead><tr><th>Day</th><th>Planned</th><th>Focus</th><th>Kept</th><th>Blocks</th><th>Shutdown</th><th class="rv-bar-head"></th></tr></thead>
+            <tbody id="rv-week-days"></tbody>
+          </table>
+          <div class="rv-footnote">Tap a day to open its review.</div>
+        </div>
+
+        <div class="charts-2col-grid">
+          <div class="card"><div class="chart-title" style="margin-bottom:14px;">Focus by tag</div><div id="rv-week-tags"></div></div>
+          <div class="card"><div class="chart-title" style="margin-bottom:14px;">Practice by skill</div><div id="rv-week-skills"></div></div>
+        </div>
+
+        <div class="card">
+          <div class="chart-header" style="margin-bottom:10px;">
+            <div class="chart-title">Weekly notes</div>
+            <span class="rv-save-status" id="review-save-status-week"></span>
+          </div>
+          <div class="rv-notes-grid">
+            <div><div class="rv-label">Wins and lessons</div>
+              <textarea class="task-input rv-textarea" id="rv-week-wins" rows="5" placeholder="What went well? What got in the way?"></textarea></div>
+            <div><div class="rv-label">Focus for next week</div>
+              <textarea class="task-input rv-textarea" id="rv-week-next" rows="5" placeholder="The few things that matter most next week"></textarea></div>
           </div>
         </div>
       </div>

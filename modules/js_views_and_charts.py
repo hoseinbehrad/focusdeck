@@ -100,6 +100,8 @@ function switchView(viewName) {
 
   if (viewName === 'timeblock') {
     renderTimeBlockView();
+  } else if (viewName === 'review') {
+    renderReviewView();
   } else if (viewName === 'skills') {
     renderSkillsView();
   } else if (viewName === 'reports') {
@@ -1699,6 +1701,7 @@ window.deleteTag = function(id) {
 function renderAllViews() {
   renderTimerUI();
   if (activeViewId === 'timeblock') renderTimeBlockView();
+  else if (activeViewId === 'review') renderReviewView();
   else if (activeViewId === 'skills') renderSkillsView();
   else if (activeViewId === 'reports') renderReportsView();
   else if (activeViewId === 'log') renderLogView();

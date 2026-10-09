@@ -17,7 +17,8 @@ const DEFAULT_SETTINGS = {
   desktopNotif: false,
   showCountdownTab: true,
   dailyGoalMin: 240,
-  customPreset: null
+  customPreset: null,
+  weekStart: 6 // 0 = Sunday, 1 = Monday, 6 = Saturday
 };
 
 const DEFAULT_TAGS = [
@@ -70,6 +71,7 @@ function migrate(data) {
   if (!Array.isArray(data.skills)) data.skills = [];
   if (!Array.isArray(data.manualBacklogEntries)) data.manualBacklogEntries = [];
   if (!data.meta || typeof data.meta !== 'object') data.meta = { lastExport: null, lastImport: null };
+  if (!data.reviews || typeof data.reviews !== 'object' || Array.isArray(data.reviews)) data.reviews = {};
 
   // Snapshots are device-only now and must never travel inside data (they used to nest and grow).
   delete data.snapshots;
@@ -407,7 +409,14 @@ function endEarlyAndSave() {
   if (t.status === 'idle') return;
 
   const now = Date.now();
-  const actualMs = Math.max(1000, now - (t.startedAt || now));
+  // Count only active (unpaused) time: planned length minus what was still left on the clock.
+  // Pauses push endsAt later, so wall-clock time (now - startedAt) would wrongly include them.
+  const plannedMs = t.plannedMs || getModeDurationMs(t.mode);
+  const remainingMs = t.status === 'running'
+    ? Math.max(0, (t.endsAt || now) - now)
+    : Math.max(0, t.remainingMs || 0);
+  const actualMs = Math.max(1000, Math.min(plannedMs, plannedMs - remainingMs));
+  const startedAt = t.startedAt || (now - actualMs);
   const sessId = uid('sess');
 
   const record = {
@@ -415,9 +424,10 @@ function endEarlyAndSave() {
     mode: t.mode,
     label: (t.label && t.label.trim()) ? t.label.trim() : (t.mode === 'focus' ? 'Focus Session' : 'Break'),
     tags: [ ...(t.selectedTagIds || []) ],
-    plannedMs: t.plannedMs || getModeDurationMs(t.mode),
-    actualMs: actualMs,
-    startedAt: t.startedAt || (now - actualMs),
+    plannedMs,
+    actualMs,
+    pausedMs: Math.max(0, (now - startedAt) - actualMs),
+    startedAt,
     endedAt: now,
     completed: true,
     interruptions: t.interruptions || 0,
@@ -445,6 +455,7 @@ function finalizeCompletedSession(endedTimestamp, wasAway) {
     tags: [ ...(t.selectedTagIds || []) ],
     plannedMs: planned,
     actualMs: planned,
+    pausedMs: t.startedAt ? Math.max(0, (now - t.startedAt) - planned) : 0,
     startedAt: t.startedAt || (now - planned),
     endedAt: now,
     completed: true,
